@@ -52,7 +52,7 @@
     s.innerHTML = '';
     var cx = 150, cy = 150, r = 140;
 
-    s.appendChild(svgEl('circle', { cx: cx, cy: cy, r: r, fill: '#ffffff', stroke: '#2d3142', 'stroke-width': 8 }));
+    s.appendChild(svgEl('circle', { cx: cx, cy: cy, r: r, fill: '#ffffff', stroke: '#123324', 'stroke-width': 8 }));
 
     for (var i = 0; i < 60; i++) {
       var hourTick = i % 5 === 0;
@@ -61,7 +61,7 @@
       s.appendChild(svgEl('line', {
         x1: cx + r1 * Math.sin(a), y1: cy - r1 * Math.cos(a),
         x2: cx + (r - 4) * Math.sin(a), y2: cy - (r - 4) * Math.cos(a),
-        stroke: '#2d3142', 'stroke-width': hourTick ? 5 : 2, 'stroke-linecap': 'round'
+        stroke: '#123324', 'stroke-width': hourTick ? 5 : 2, 'stroke-linecap': 'round'
       }));
     }
 
@@ -70,18 +70,18 @@
       var t = svgEl('text', {
         x: cx + (r - 36) * Math.sin(ang), y: cy - (r - 36) * Math.cos(ang),
         'text-anchor': 'middle', 'dominant-baseline': 'central',
-        'font-size': 30, 'font-weight': 800, fill: '#2d3142',
-        'font-family': "'Comic Sans MS','Chalkboard SE',sans-serif"
+        'font-size': 30, 'font-weight': 800, fill: '#123324',
+        'font-family': "'Nunito','Segoe UI',sans-serif"
       });
       t.textContent = String(n);
       s.appendChild(t);
     }
 
-    var hourHand = svgEl('line', { id: 'hour-hand', x1: cx, y1: cy + 14, x2: cx, y2: cy - 66, stroke: '#2d3142', 'stroke-width': 10, 'stroke-linecap': 'round' });
-    var minHand = svgEl('line', { id: 'min-hand', x1: cx, y1: cy + 14, x2: cx, y2: cy - 108, stroke: '#e63946', 'stroke-width': 7, 'stroke-linecap': 'round' });
+    var hourHand = svgEl('line', { id: 'hour-hand', x1: cx, y1: cy + 14, x2: cx, y2: cy - 66, stroke: '#123324', 'stroke-width': 10, 'stroke-linecap': 'round' });
+    var minHand = svgEl('line', { id: 'min-hand', x1: cx, y1: cy + 14, x2: cx, y2: cy - 108, stroke: '#e2543e', 'stroke-width': 7, 'stroke-linecap': 'round' });
     s.appendChild(hourHand);
     s.appendChild(minHand);
-    s.appendChild(svgEl('circle', { cx: cx, cy: cy, r: 9, fill: '#2d3142' }));
+    s.appendChild(svgEl('circle', { cx: cx, cy: cy, r: 9, fill: '#123324' }));
     s.appendChild(svgEl('circle', { cx: cx, cy: cy, r: 4, fill: '#ffffff' }));
   }
 
@@ -198,10 +198,10 @@
     el.wrap.classList.add('shake');
   }
 
-  var SVG_GOOD = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#2a9d8f"/><path d="M6.5 12.5l3.8 3.8L17.8 8.5" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-  var SVG_BAD = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#e63946"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="2.8" stroke-linecap="round" fill="none"/></svg>';
-  var SVG_SOUND_ON = '<svg viewBox="0 0 24 24" class="ic"><path d="M4 9v6h4l5 4V5L8 9z" fill="#2d3142"/><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12" fill="none" stroke="#2d3142" stroke-width="2" stroke-linecap="round"/></svg>';
-  var SVG_SOUND_OFF = '<svg viewBox="0 0 24 24" class="ic"><path d="M4 9v6h4l5 4V5L8 9z" fill="#2d3142"/><path d="M16 9.5l5.5 5.5M21.5 9.5L16 15" stroke="#2d3142" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
+  var SVG_GOOD = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#2e8b57"/><path d="M6.5 12.5l3.8 3.8L17.8 8.5" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+  var SVG_BAD = '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="11" fill="#e2543e"/><path d="M8 8l8 8M16 8l-8 8" stroke="#fff" stroke-width="2.8" stroke-linecap="round" fill="none"/></svg>';
+  var SVG_SOUND_ON = '<svg viewBox="0 0 24 24" class="ic"><path d="M4 9v6h4l5 4V5L8 9z" fill="#e8f5e9"/><path d="M16.5 8.5a5 5 0 010 7M19 6a8.5 8.5 0 010 12" fill="none" stroke="#e8f5e9" stroke-width="2" stroke-linecap="round"/></svg>';
+  var SVG_SOUND_OFF = '<svg viewBox="0 0 24 24" class="ic"><path d="M4 9v6h4l5 4V5L8 9z" fill="#e8f5e9"/><path d="M16 9.5l5.5 5.5M21.5 9.5L16 15" stroke="#e8f5e9" stroke-width="2" stroke-linecap="round" fill="none"/></svg>';
 
   function showFeedback(kind) {
     el.feedback.innerHTML = kind === 'good' ? SVG_GOOD : SVG_BAD;
@@ -211,7 +211,7 @@
   }
 
   function confettiBurst() {
-    var colors = ['#e63946', '#f4a261', '#2a9d8f', '#e9c46a', '#457b9d', '#ff9f1c'];
+    var colors = ['#7ee081', '#7ee0c2', '#f2b8c6', '#ffb703', '#2e8b57', '#e8f5e9'];
     for (var i = 0; i < 26; i++) {
       var c = document.createElement('div');
       c.className = 'confetto';

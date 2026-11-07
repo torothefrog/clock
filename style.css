@@ -1,10 +1,41 @@
+/* Clock - Pond house style (see github.com/torothefrog/pond STYLE_GUIDE.md) */
+
+@font-face {
+  font-family: "Nunito";
+  src: url("assets/fonts/nunito-latin-ext.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 1000;
+  font-display: swap;
+}
+
+:root {
+  --bg: #0b1d13;
+  --bg2: #123324;
+  --card: #1d5c38;
+  --pad-light: #2e8b57;
+  --accent: #7ee081;
+  --accent2: #7ee0c2;
+  --lily: #f2b8c6;
+  --text: #e8f5e9;
+  --muted: #9fc8aa;
+  --danger: #e2543e;
+  --gold: #ffb703;
+  --sat: env(safe-area-inset-top, 0px);
+  --sab: env(safe-area-inset-bottom, 0px);
+}
+
 * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
 
+html { background-color: var(--bg); }
 html, body { height: 100%; }
 
 body {
-  font-family: 'Comic Sans MS', 'Chalkboard SE', 'Segoe UI', sans-serif;
-  background: linear-gradient(160deg, #aee9ff 0%, #d3f8e2 55%, #fff3b0 100%);
+  font-family: 'Nunito', 'Segoe UI', sans-serif;
+  background:
+    radial-gradient(ellipse 80% 50% at 50% -10%, rgba(46, 139, 87, 0.35), transparent),
+    radial-gradient(ellipse 60% 40% at 85% 110%, rgba(46, 139, 87, 0.2), transparent),
+    var(--bg);
+  color: var(--text);
   display: flex;
   justify-content: center;
   user-select: none;
@@ -14,7 +45,7 @@ body {
 #app {
   width: 100%;
   max-width: 460px;
-  padding: 10px 14px 20px;
+  padding: calc(10px + var(--sat)) 14px calc(20px + var(--sab));
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -27,17 +58,30 @@ header {
   justify-content: space-between;
   gap: 8px;
   margin-bottom: 6px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 430px) {
+  header { flex-wrap: nowrap; gap: 5px; }
+  .badge { font-size: 15px; padding: 4px 8px; gap: 4px; }
+  .badge .ic { width: 16px; height: 16px; }
+  .level { padding: 2px 5px; }
+  .level .ic { width: 20px; height: 20px; }
+  #sound { padding: 4px 6px; }
+  #sound .ic { width: 20px; height: 20px; }
 }
 
 #score { display: flex; gap: 6px; }
 
 .badge {
-  background: #ffffffcc;
+  background: var(--card);
+  border: 1px solid rgba(126, 224, 129, 0.25);
   border-radius: 999px;
   padding: 6px 12px;
   font-size: 20px;
-  font-weight: 700;
-  box-shadow: 0 2px 6px #0002;
+  font-weight: 800;
+  color: var(--text);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
   display: flex;
   align-items: center;
   gap: 5px;
@@ -51,25 +95,25 @@ header {
 
 .level {
   font-size: 24px;
-  background: #ffffffaa;
+  background: var(--card);
   border: 3px solid transparent;
   border-radius: 14px;
   padding: 4px 8px;
   cursor: pointer;
-  box-shadow: 0 2px 6px #0002;
-  transition: transform .1s;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
+  transition: transform .1s, border-color .1s, background .1s;
 }
 .level:active { transform: scale(.92); }
-.level.active { border-color: #ff9f1c; background: #fff; }
+.level.active { border-color: var(--accent); background: var(--bg2); }
 
 #sound {
   font-size: 22px;
-  background: #ffffffaa;
-  border: none;
+  background: var(--card);
+  border: 1px solid rgba(126, 224, 129, 0.25);
   border-radius: 14px;
   padding: 6px 10px;
   cursor: pointer;
-  box-shadow: 0 2px 6px #0002;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.35);
 }
 
 main {
@@ -88,7 +132,7 @@ main {
 #clock {
   width: 100%;
   display: block;
-  filter: drop-shadow(0 6px 12px #0003);
+  filter: drop-shadow(0 6px 12px rgba(0, 0, 0, 0.4));
 }
 
 #clock-wrap.shake { animation: shake .45s; }
@@ -105,24 +149,25 @@ main {
   align-items: center;
   justify-content: center;
   gap: 4px;
-  background: #fff;
+  background: var(--bg2);
+  border: 1px solid rgba(126, 224, 129, 0.25);
   border-radius: 18px;
   padding: 8px 18px;
-  box-shadow: 0 3px 8px #0002;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.35);
   margin-bottom: 12px;
 }
 
 .dig, .colon {
   font-size: 44px;
   font-weight: 800;
-  color: #2d3142;
+  color: var(--text);
   min-width: 34px;
   text-align: center;
 }
-.dig { border-bottom: 4px solid #e0e0e0; }
-.dig.next { border-bottom-color: #ff9f1c; animation: pulse 1s infinite; }
-@keyframes pulse { 50% { border-bottom-color: #ffd68a; } }
-.dig.reveal { color: #2a9d8f; }
+.dig { border-bottom: 4px solid var(--pad-light); }
+.dig.next { border-bottom-color: var(--accent); animation: pulse 1s infinite; }
+@keyframes pulse { 50% { border-bottom-color: var(--accent2); } }
+.dig.reveal { color: var(--accent2); }
 
 #pad {
   display: grid;
@@ -136,27 +181,27 @@ main {
   font-size: 30px;
   font-weight: 800;
   font-family: inherit;
-  color: #2d3142;
-  background: #fff;
+  color: var(--text);
+  background: var(--card);
   border: none;
   border-radius: 16px;
   padding: 12px 0;
   cursor: pointer;
-  box-shadow: 0 4px 0 #d9d9d9, 0 6px 10px #0002;
+  box-shadow: 0 4px 0 var(--bg2), 0 6px 10px rgba(0, 0, 0, 0.35);
   transition: transform .08s, box-shadow .08s;
 }
 .key:active {
   transform: translateY(3px);
-  box-shadow: 0 1px 0 #d9d9d9, 0 2px 4px #0002;
+  box-shadow: 0 1px 0 var(--bg2), 0 2px 4px rgba(0, 0, 0, 0.35);
 }
-.key.action { background: #ffe8cc; }
+.key.action { background: var(--bg2); border: 1px solid rgba(126, 224, 129, 0.25); }
 .key.go {
   grid-column: 1 / -1;
-  background: #2a9d8f;
+  background: var(--pad-light);
   font-size: 34px;
-  box-shadow: 0 4px 0 #1f7a70, 0 6px 10px #0002;
+  box-shadow: 0 4px 0 var(--card), 0 6px 10px rgba(0, 0, 0, 0.35);
 }
-.key.go:active { box-shadow: 0 1px 0 #1f7a70; }
+.key.go:active { box-shadow: 0 1px 0 var(--card); }
 
 #feedback {
   position: fixed;
@@ -168,7 +213,7 @@ main {
   opacity: 0;
   z-index: 20;
 }
-#feedback svg { width: 130px; height: 130px; filter: drop-shadow(0 6px 14px #0004); }
+#feedback svg { width: 130px; height: 130px; filter: drop-shadow(0 6px 14px rgba(0, 0, 0, 0.5)); }
 #feedback.show { animation: pop 1s ease-out; }
 @keyframes pop {
   0% { opacity: 0; transform: scale(.3); }

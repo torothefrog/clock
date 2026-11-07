@@ -26,5 +26,9 @@ Open `index.html` in any browser. No build step, no dependencies.
 ## Files
 
 - `index.html` - page and layout
-- `style.css` - kid-friendly styling, animations
+- `style.css` - styling and animations in the shared Pond house style
 - `game.js` - clock drawing (SVG), game logic, sound (Web Audio)
+- `assets/fonts/` - Nunito (SIL Open Font License 1.1, see `OFL.txt`), bundled locally
+
+Styling follows the shared Pond style guide:
+https://github.com/torothefrog/pond/blob/main/STYLE_GUIDE.md
