@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Clock</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div id="app">
+  <header>
+    <div id="score">
+      <span class="badge"><svg viewBox="0 0 24 24" class="ic"><path d="M12 2.5l2.9 6 6.6.9-4.8 4.6 1.2 6.5L12 17.4 6.1 20.5l1.2-6.5L2.5 9.4l6.6-.9z" fill="#ffb703" stroke="#e08e00" stroke-width="1.4" stroke-linejoin="round"/></svg><span id="stars">0</span></span>
+      <span class="badge"><svg viewBox="0 0 24 24" class="ic"><path d="M12 2c1 3-1 4.5-2 6.2C8.8 10.4 8 12 8 14a4.5 4.5 0 009 0c0-1-.3-1.9-.8-2.7-.5 1-1.2 1.7-2.2 2.2.8-2.5.3-5.2-.8-7.3C12.7 5 12.2 3.6 12 2zM12 22a7 7 0 01-7-7c0-2.6 1.2-4.6 2.6-6.6C9.4 5.9 11 4 11.5 1c2.3 2 3.6 4.8 3.2 7.6 1.2-.3 2.1-1.1 2.6-2.3A9.6 9.6 0 0119 15a7 7 0 01-7 7z" fill="#ff6d00" stroke="#d94f00" stroke-width="1" stroke-linejoin="round" fill-rule="evenodd"/></svg><span id="streak">0</span></span>
+    </div>
+    <div id="levels">
+      <button class="level" data-level="0" aria-label="full hours"><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="10" fill="#fff" stroke="#2d3142" stroke-width="2"/><path d="M12 12V5M12 12l4.5 0" stroke="#2d3142" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg></button>
+      <button class="level" data-level="1" aria-label="half hours"><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="10" fill="#fff" stroke="#2d3142" stroke-width="2"/><path d="M12 12V5.5M12 12V18" stroke="#2d3142" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg></button>
+      <button class="level" data-level="2" aria-label="quarter hours"><svg viewBox="0 0 24 24" class="ic"><circle cx="12" cy="12" r="10" fill="#fff" stroke="#2d3142" stroke-width="2"/><path d="M12 12V5.5M12 12l4.8 0" stroke="#2d3142" stroke-width="2.2" stroke-linecap="round" fill="none"/><path d="M12 12l0 4.8" stroke="#e63946" stroke-width="2.2" stroke-linecap="round" fill="none"/></svg></button>
+      <button class="level" data-level="3" aria-label="any five minutes"><svg viewBox="0 0 24 24" class="ic"><rect x="3" y="3" width="18" height="18" rx="4.5" fill="#fff" stroke="#2d3142" stroke-width="2"/><circle cx="8" cy="8" r="1.7" fill="#2d3142"/><circle cx="16" cy="8" r="1.7" fill="#2d3142"/><circle cx="12" cy="12" r="1.7" fill="#2d3142"/><circle cx="8" cy="16" r="1.7" fill="#2d3142"/><circle cx="16" cy="16" r="1.7" fill="#2d3142"/></svg></button>
+    </div>
+    <button id="sound" aria-label="sound on or off"></button>
+  </header>
+
+  <main>
+    <div id="clock-wrap">
+      <svg id="clock" viewBox="0 0 300 300" role="img" aria-label="analog clock"></svg>
+      <div id="confetti"></div>
+    </div>
+
+    <div id="answer">
+      <span id="d0" class="dig">_</span><span id="d1" class="dig">_</span><span class="colon">:</span><span id="d2" class="dig">_</span><span id="d3" class="dig">_</span>
+    </div>
+
+    <div id="pad">
+      <button class="key" data-k="1">1</button>
+      <button class="key" data-k="2">2</button>
+      <button class="key" data-k="3">3</button>
+      <button class="key" data-k="4">4</button>
+      <button class="key" data-k="5">5</button>
+      <button class="key" data-k="6">6</button>
+      <button class="key" data-k="7">7</button>
+      <button class="key" data-k="8">8</button>
+      <button class="key" data-k="9">9</button>
+      <button class="key action" id="hint" aria-label="hint"><svg viewBox="0 0 24 24" class="ic"><path d="M12 3a6.5 6.5 0 00-4 11.6c.8.7 1.3 1.6 1.5 2.6h5c.2-1 .7-1.9 1.5-2.6A6.5 6.5 0 0012 3z" fill="#ffb703" stroke="#b07900" stroke-width="1.5" stroke-linejoin="round"/><path d="M9.8 19.2h4.4M10.3 21.2h3.4" stroke="#b07900" stroke-width="1.6" stroke-linecap="round" fill="none"/></svg></button>
+      <button class="key" data-k="0">0</button>
+      <button class="key action" id="back" aria-label="backspace"><svg viewBox="0 0 24 24" class="ic"><path d="M8.5 5H20a1.5 1.5 0 011.5 1.5v11A1.5 1.5 0 0120 19H8.5L2 12z" fill="none" stroke="#2d3142" stroke-width="2" stroke-linejoin="round"/><path d="M11 9.3l5.4 5.4M16.4 9.3L11 14.7" stroke="#2d3142" stroke-width="2" stroke-linecap="round" fill="none"/></svg></button>
+      <button class="key go" id="check" aria-label="check"><svg viewBox="0 0 24 24" class="ic big"><path d="M4.5 12.5l5 5L19.5 7" fill="none" stroke="#ffffff" stroke-width="3.6" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    </div>
+  </main>
+
+  <div id="feedback"></div>
+</div>
+<script src="game.js"></script>
+</body>
+</html>
